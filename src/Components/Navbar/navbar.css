@@ -1,0 +1,203 @@
+/* navbar.css - Mountain Glass Theme */
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* NAVBAR MAIN */
+.nav-container {
+  width: 100%;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* LOGO */
+.nav-logo a {
+  font-size: 28px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* DESKTOP LINKS */
+.nav-links {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #e6ffe9;
+  font-size: 17px;
+  transition: 0.3s;
+  position: relative;
+}
+
+.nav-links li a:hover {
+  color: #29bd53;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Adjust based on your design */
+  width: 100%;
+  height: 2px;
+  background-color: #29bd53;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+  border-radius: 5px;
+}
+
+.nav-links li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.login-btn::after,
+.signup-btn::after {
+  content: none;
+  display: none; /* This removes the underline effect */
+}
+
+.mobile-menu li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: #29bd53;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* BUTTONS */
+.login-btn,
+.signup-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.login-btn {
+  background: transparent;
+  border: 1px solid #b6ffcb;
+  color: #b6ffcb26;
+}
+
+.login-btn:hover {
+  background: #b6ffcb;
+  color: #1a3d2b;
+}
+
+.signup-btn {
+  background: #3fa76f;
+  color: white;
+}
+
+.signup-btn:hover {
+  background: #2c734d;
+}
+
+/* MOBILE MENU ICON */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.bar {
+  width: 28px;
+  height: 3px;
+  background: white;
+  transition: 0.4s;
+}
+
+/* OPEN ANIMATION */
+.bar1-open {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+.bar2-open {
+  opacity: 0;
+}
+.bar3-open {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  width: 220px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  list-style: none;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.mobile-menu li a:hover {
+  color: #b6ffcb;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+}

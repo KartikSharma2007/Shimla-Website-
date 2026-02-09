@@ -1,0 +1,208 @@
+/* login.css - Mountain Nature Theme */
+
+/* ======================== */
+/* GLOBAL RESET */
+/* ======================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ======================== */
+/* MAIN WRAPPER */
+/* ======================== */
+.login-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ======================== */
+/* BACKGROUND (Mountain Parallax) */
+/* ======================== */
+.login-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("../../assets/login.jfif")
+    no-repeat center center/cover;
+  filter: brightness(65%);
+  z-index: -1;
+  animation: bgMove 25s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+/* ======================== */
+/* LOGIN CARD CONTAINER */
+/* ======================== */
+.login-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px 20px;
+}
+
+/* ======================== */
+/* LOGIN CARD */
+/* ======================== */
+.login-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  padding: 40px;
+  max-width: 450px;
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======================== */
+/* TITLES */
+/* ======================== */
+.login-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.login-subtitle {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  color: #e8e8e8;
+}
+
+/* ======================== */
+/* FORM */
+/* ======================== */
+.login-form label {
+  color: #e4ffe6;
+  font-size: 14px;
+  margin: 10px 0 6px 2px;
+  display: block;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.login-input:focus {
+  border-color: #b8ffcb;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ======================== */
+/* PASSWORD SHOW/HIDE */
+/* ======================== */
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 35%;
+  right: 15px;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.8;
+}
+
+.toggle-password:hover {
+  opacity: 1;
+}
+
+/* ======================== */
+/* LOGIN BUTTON */
+/* ======================== */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #3fa76f, #1b5e20);
+  color: white;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* ======================== */
+/* BOTTOM TEXT */
+/* ======================== */
+.login-bottom-text {
+  text-align: center;
+  margin-top: 20px;
+  color: #e6ffe9;
+}
+
+.login-bottom-text a {
+  color: #b8ffcb;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.login-bottom-text a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* ======================== */
+/* MEDIA RESPONSIVE */
+/* ======================== */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px 20px;
+  }
+
+  .login-title {
+    font-size: 26px;
+  }
+}

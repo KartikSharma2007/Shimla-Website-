@@ -1,0 +1,358 @@
+/* ================= OVERLAY ================= */
+.top-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.889); /* overlay stays dark */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+/* ================= MODAL ================= */
+.top-modal {
+  background: #ffffff;  /* SOLID WHITE */
+  width: 100%;
+  max-width: 1400px;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ================= CLOSE ================= */
+.top-close-btn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  background: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+
+  display: flex;                 /* ✅ center icon */
+  align-items: center;           /* ✅ vertical center */
+  justify-content: center;       /* ✅ horizontal center */
+
+  cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+  transition: 
+    transform 0.6s ease,
+    background 0.3s ease;
+}
+
+/* ICON STYLE */
+.top-close-btn svg {
+  transition: 
+    transform 0.5s ease,
+    color 0.2s ease;
+  color: #555;   /* default color */
+}
+
+/* HOVER EFFECT */
+.top-close-btn:hover {
+  background: black;
+}
+
+/* ROTATE + COLOR CHANGE */
+.top-close-btn:hover svg {
+  transform: rotate(90deg);   /* 🔁 full rotation */
+  color: white;              /* 🖤 black on hover */
+}
+
+/* ================= HERO ================= */
+.top-hero {
+  position: relative;
+  height: 45vh;
+  min-height: 320px;
+}
+
+.top-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.top-hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+}
+
+.top-hero-text {
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+  color: #ffffff;
+  max-width: 800px;
+}
+
+.top-hero-text h1 {
+  font-size: 64px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.top-hero-text p {
+  font-size: 20px;
+  margin-top: 12px;
+  opacity: 1;   /* FIX: no transparency */
+}
+
+/* ================= BODY ================= */
+.top-body {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 60px;
+  padding: 80px 80px 100px;
+  background: #ffffff;   /* SOLID WHITE */
+}
+
+/* ================= ARTICLE ================= */
+.top-article-section {
+  margin-bottom: 80px;
+  background: #ffffff;   /* SOLID WHITE */
+}
+
+.top-article-section h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.top-divider {
+  width: 70px;
+  height: 4px;
+  background: #111;
+  margin-bottom: 35px;
+}
+
+/* Long text support */
+.top-long-text {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #333;
+  max-width: 900px;
+  white-space: pre-line;   /* allows multiline text */
+  background: #ffffff;    /* SOLID WHITE */
+  opacity: 0;
+  transform: translateY(25px);
+  animation: revealText 1s ease forwards;
+  animation-delay: 0.2s;
+}
+@keyframes revealText {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ================= RATING BADGE ================= */
+.top-rating-badge {
+  position: absolute;
+  top: 450px;        /* under close button */
+  right: 50px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+
+.rating-badg {
+  position: absolute;
+  top: 250px;
+  right: 50px;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+
+.top-rating-badge span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.top-rating-badge small {
+  font-size: 13px;
+  color: #666;
+}
+
+
+/* ================= HIGHLIGHTS ================= */
+.top-highlight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: #ffffff; /* SOLID WHITE */
+}
+
+.top-highlight-item {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.top-highlight-item span {
+  font-weight: 700;
+  font-size: 18px;
+  color: #111;
+}
+
+.top-highlight-item p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #222;
+}
+
+/* ================= PREMIUM HIGHLIGHTS ================= */
+
+.premium-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 10px;
+}
+
+.premium-highlight-card {
+  background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 22px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all 0.35s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+}
+
+.premium-highlight-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+}
+
+.premium-highlight-number {
+  min-width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #111;
+  color: #ffffff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.premium-highlight-text {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #222;
+}
+
+/* ================= HIGHLIGHT RIGHT LINE EFFECT ================= */
+
+.premium-highlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Line */
+.premium-highlight-card::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: black;
+  transition: top 0.35s ease;
+  opacity: 1;
+}
+
+/* Hover animation */
+.premium-highlight-card:hover::after {
+  top: 0;
+}
+
+
+/* ================= SIDE PANEL ================= */
+.top-side-card {
+  background: #ffffff;  /* WAS #fafafa → now pure white */
+  padding: 35px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  position: sticky;
+  top: 120px;
+}
+
+.top-side-card h3 {
+  font-size: 22px;
+  margin-bottom: 25px;
+  color: #111;
+}
+
+.top-side-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+  align-items: center;
+}
+
+.top-side-item span {
+  font-size: 13px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.top-side-item p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .top-body {
+    grid-template-columns: 1fr;
+  }
+
+  .top-side-card {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-hero-text h1 {
+    font-size: 40px;
+  }
+
+  .top-body {
+    padding: 40px 30px 60px;
+  }
+
+  .top-long-text {
+    font-size: 17px;
+    
+  }
+}
