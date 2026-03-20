@@ -1,0 +1,205 @@
+/*
+ * SkeletonCard.css
+ * Fix #18 — Skeleton loader styles
+ * The shimmer animation gives users visual feedback that content is loading.
+ */
+
+/* ── Shimmer animation ──────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #e8e8e8 25%,
+    #f5f5f5 50%,
+    #e8e8e8 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite ease-in-out;
+  border-radius: 6px;
+}
+
+/* ── Card shell ─────────────────────────────────────────────────────────── */
+.skeleton-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Image placeholder ──────────────────────────────────────────────────── */
+.skeleton-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+
+.skeleton-card--package .skeleton-image {
+  height: 220px;
+}
+
+/* ── Body ───────────────────────────────────────────────────────────────── */
+.skeleton-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+/* ── Lines ──────────────────────────────────────────────────────────────── */
+.skeleton-line {
+  height: 14px;
+  border-radius: 6px;
+}
+
+.skeleton-line--title {
+  width: 75%;
+  height: 18px;
+}
+
+.skeleton-line--sub {
+  width: 55%;
+  height: 13px;
+}
+
+.skeleton-line--short {
+  width: 38%;
+  height: 12px;
+}
+
+.skeleton-line--price {
+  width: 45%;
+  height: 20px;
+}
+
+/* ── Row (two items side by side) ───────────────────────────────────────── */
+.skeleton-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ── Footer row ─────────────────────────────────────────────────────────── */
+.skeleton-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+/* ── Button placeholder ─────────────────────────────────────────────────── */
+.skeleton-btn {
+  width: 100px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+/* ── Grid layout ────────────────────────────────────────────────────────── */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 24px 0;
+}
+
+/* ── Error state ────────────────────────────────────────────────────────── */
+.skeleton-error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  gap: 12px;
+}
+
+.skeleton-error-icon {
+  font-size: 40px;
+  color: #e67e22;
+}
+
+.skeleton-error-message {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+  max-width: 360px;
+}
+
+.skeleton-retry-btn {
+  margin-top: 8px;
+  padding: 10px 24px;
+  background: #1A3C6E;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.skeleton-retry-btn:hover {
+  background: #0d2b55;
+}
+
+/* ── Empty state ────────────────────────────────────────────────────────── */
+.skeleton-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  gap: 10px;
+}
+
+.skeleton-empty-icon {
+  font-size: 40px;
+}
+
+.skeleton-empty-message {
+  font-size: 16px;
+  color: #444;
+  margin: 0;
+  font-weight: 600;
+}
+
+.skeleton-empty-hint {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+/* ── Dark mode support ──────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      #2a2a2a 25%,
+      #3a3a3a 50%,
+      #2a2a2a 75%
+    );
+    background-size: 600px 100%;
+    animation: shimmer 1.6s infinite ease-in-out;
+  }
+
+  .skeleton-card {
+    background: #1e1e1e;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .skeleton-error-message,
+  .skeleton-empty-message {
+    color: #ccc;
+  }
+
+  .skeleton-empty-hint {
+    color: #888;
+  }
+}

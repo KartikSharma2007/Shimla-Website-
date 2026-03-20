@@ -1,0 +1,251 @@
+/* HotelReviewSection styles */
+
+.hrv-root {
+  padding: 28px 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* ── Header ── */
+.hrv-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.hrv-title  { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+.hrv-subtitle {
+  display: flex; align-items: center; gap: 5px;
+  margin-top: 4px; font-size: 14px; color: #6b7280;
+}
+.hrv-write-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 18px;
+  background: #2f7d57; color: #fff;
+  border: none; border-radius: 9px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.hrv-write-btn:hover { background: #1e5c3a; }
+.hrv-login-hint { font-size: 12px; color: #9ca3af; padding-top: 10px; }
+
+/* ── Rating overview ── */
+.hrv-overview {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 20px;
+  background: #fafffe;
+  border: 1px solid #e6f4ee;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.hrv-big-rating {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+  min-width: 100px;
+}
+.hrv-big-num   { font-size: 44px; font-weight: 800; color: #1a1a2e; line-height: 1; }
+.hrv-big-total { font-size: 12px; color: #9ca3af; }
+.hrv-dist      { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 5px; }
+.hrv-dist-row  { display: flex; align-items: center; gap: 8px; }
+.hrv-dist-label{ font-size: 12px; color: #6b7280; width: 22px; flex-shrink: 0; }
+.hrv-dist-track{
+  flex: 1; height: 7px;
+  background: #e5e7eb; border-radius: 4px; overflow: hidden;
+}
+.hrv-dist-fill { height: 100%; background: #2f7d57; border-radius: 4px; transition: width 0.5s ease; }
+.hrv-dist-count{ font-size: 12px; color: #9ca3af; width: 20px; text-align: right; flex-shrink: 0; }
+
+/* ── Write form ── */
+.hrv-form-wrap {
+  background: #fff;
+  border: 1.5px solid #e6f4ee;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(47,125,87,0.06);
+}
+.hrv-form-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.hrv-form-header h3 { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+.hrv-close-form {
+  background: none; border: none; font-size: 18px;
+  color: #9ca3af; cursor: pointer; padding: 4px;
+  border-radius: 6px; transition: color 0.15s;
+}
+.hrv-close-form:hover { color: #374151; }
+
+.hrv-form-group { margin-bottom: 14px; }
+.hrv-form-group label {
+  display: block; font-size: 13px; font-weight: 600;
+  color: #374151; margin-bottom: 6px;
+}
+.hrv-req { color: #ef4444; margin-left: 2px; }
+.hrv-opt { color: #9ca3af; font-weight: 400; font-size: 12px; }
+
+.hrv-input, .hrv-textarea, .hrv-select {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 9px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+  background: #fff;
+}
+.hrv-input:focus, .hrv-textarea:focus, .hrv-select:focus { border-color: #2f7d57; }
+.hrv-textarea { resize: vertical; min-height: 90px; }
+.hrv-char { display: block; text-align: right; font-size: 11px; color: #9ca3af; margin-top: 4px; }
+
+.hrv-star-picker {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0;
+}
+.hrv-rating-label { font-size: 14px; font-weight: 600; color: #2f7d57; }
+
+.hrv-error {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 14px;
+  background: #fef2f2; border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #dc2626; font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.hrv-form-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.hrv-btn-cancel {
+  padding: 9px 18px;
+  background: #f3f4f6; color: #4b5563;
+  border: 1px solid #e5e7eb; border-radius: 9px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.hrv-btn-cancel:hover { background: #e5e7eb; }
+.hrv-btn-submit {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 20px;
+  background: #2f7d57; color: #fff;
+  border: none; border-radius: 9px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background 0.15s;
+}
+.hrv-btn-submit:hover:not(:disabled) { background: #1e5c3a; }
+.hrv-btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.hrv-spin { animation: hrv-spin 1s linear infinite; }
+@keyframes hrv-spin { to { transform: rotate(360deg); } }
+
+/* ── Success state ── */
+.hrv-success {
+  text-align: center; padding: 28px;
+}
+.hrv-success-icon { font-size: 40px; margin-bottom: 12px; }
+.hrv-success h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: #1a1a2e; }
+.hrv-success p  { font-size: 14px; color: #6b7280; }
+
+/* ── Loading skeletons ── */
+.hrv-loading { display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; }
+.hrv-skeleton {
+  height: 100px; border-radius: 12px;
+  background: linear-gradient(90deg, #f5f5f5 25%, #ebebeb 50%, #f5f5f5 75%);
+  background-size: 200% 100%;
+  animation: hrv-shimmer 1.5s infinite;
+}
+@keyframes hrv-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Empty ── */
+.hrv-empty {
+  text-align: center; padding: 36px; color: #9ca3af;
+}
+.hrv-empty p { font-size: 14px; margin-top: 10px; }
+
+/* ── Review cards ── */
+.hrv-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px; }
+
+.hrv-card {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 18px;
+  transition: box-shadow 0.15s;
+}
+.hrv-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+.hrv-card-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 12px;
+  margin-bottom: 10px; flex-wrap: wrap;
+}
+.hrv-reviewer { display: flex; align-items: center; gap: 10px; }
+.hrv-avatar {
+  width: 36px; height: 36px;
+  background: #e8f5e9; color: #2f7d57;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; overflow: hidden; flex-shrink: 0;
+}
+.hrv-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.hrv-reviewer-name { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+.hrv-reviewer-meta { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.hrv-travel-tag {
+  font-size: 10px; padding: 2px 7px;
+  background: #e8f5e9; color: #2f7d57;
+  border-radius: 20px; font-weight: 600;
+}
+.hrv-date { font-size: 12px; color: #9ca3af; }
+
+.hrv-card-rating { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.hrv-verified {
+  display: flex; align-items: center; gap: 3px;
+  font-size: 10px; color: #2f7d57; font-weight: 600;
+}
+
+.hrv-card-title {
+  font-size: 14px; font-weight: 700;
+  color: #1a1a2e; font-style: italic;
+  margin-bottom: 6px;
+}
+.hrv-card-comment { font-size: 14px; color: #4b5563; line-height: 1.6; }
+
+.hrv-card-footer {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px solid #f5f5f5;
+}
+.hrv-edited { font-size: 11px; color: #9ca3af; font-style: italic; }
+.hrv-helpful-btn {
+  display: flex; align-items: center; gap: 5px;
+  background: none; border: 1px solid #e5e7eb;
+  color: #6b7280; padding: 5px 12px;
+  border-radius: 20px; font-size: 12px;
+  cursor: pointer; transition: all 0.15s;
+}
+.hrv-helpful-btn:hover { border-color: #2f7d57; color: #2f7d57; }
+.hrv-helpful-btn.hrv-liked { border-color: #2f7d57; color: #2f7d57; background: #e8f5e9; }
+
+.hrv-show-more {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; padding: 12px;
+  background: #fafffe; border: 1.5px solid #e6f4ee;
+  border-radius: 10px; color: #2f7d57;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.hrv-show-more:hover { background: #e8f5e9; }
+
+@media (max-width: 600px) {
+  .hrv-overview { flex-direction: column; gap: 16px; }
+  .hrv-big-rating { flex-direction: row; align-items: center; }
+  .hrv-big-num { font-size: 36px; }
+}

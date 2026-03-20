@@ -1,0 +1,90 @@
+.mpm-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 999999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.mpm-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%; max-width: 420px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+  overflow: hidden;
+  animation: mpm-in 0.2s ease;
+}
+@keyframes mpm-in {
+  from { transform: scale(0.94); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+.mpm-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  background: #059669; color: #fff;
+}
+.mpm-brand { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
+.mpm-brand-icon { opacity: 0.9; }
+.mpm-secure-badge {
+  font-size: 11px; background: rgba(255,255,255,0.2);
+  padding: 2px 8px; border-radius: 20px;
+}
+.mpm-close {
+  background: rgba(255,255,255,0.2); border: none; color: #fff;
+  cursor: pointer; border-radius: 50%; width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+}
+.mpm-close:hover { background: rgba(255,255,255,0.3); }
+.mpm-amount-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; background: #f0fdf4; border-bottom: 1px solid #d1fae5;
+}
+.mpm-amount-label { font-size: 12px; color: #6b7280; margin-bottom: 2px; }
+.mpm-ref { font-size: 11px; color: #9ca3af; }
+.mpm-amount { font-size: 22px; font-weight: 700; color: #059669; }
+.mpm-methods {
+  display: flex; border-bottom: 1px solid #e5e7eb;
+}
+.mpm-method {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 12px 4px; border: none; background: none;
+  cursor: pointer; font-size: 11px; color: #6b7280; border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+}
+.mpm-method:hover { color: #059669; background: #f0fdf4; }
+.mpm-method.active { color: #059669; border-bottom-color: #059669; font-weight: 600; background: #f0fdf4; }
+.mpm-input-area { padding: 20px; }
+.mpm-field label { display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+.mpm-field input, .mpm-field select {
+  width: 100%; padding: 10px 12px; border: 1.5px solid #d1d5db;
+  border-radius: 8px; font-size: 14px; outline: none;
+  transition: border-color 0.15s;
+}
+.mpm-field input:focus, .mpm-field select:focus { border-color: #059669; }
+.mpm-hint { font-size: 11px; color: #9ca3af; margin-top: 6px; }
+.mpm-wallet-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.mpm-wallet-chip {
+  padding: 6px 14px; border: 1.5px solid #d1d5db; border-radius: 20px;
+  font-size: 13px; cursor: pointer; transition: all 0.15s;
+}
+.mpm-wallet-chip:hover { border-color: #059669; color: #059669; background: #f0fdf4; }
+.mpm-error {
+  display: flex; align-items: center; gap: 6px;
+  margin: 0 20px 12px; padding: 10px 12px;
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px;
+  color: #dc2626; font-size: 13px;
+}
+.mpm-pay-btn {
+  width: calc(100% - 40px); margin: 0 20px 12px;
+  padding: 14px; background: #059669; color: #fff;
+  border: none; border-radius: 10px; font-size: 15px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.15s;
+}
+.mpm-pay-btn:hover:not(:disabled) { background: #047857; }
+.mpm-pay-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.mpm-spin { animation: mpm-spin 1s linear infinite; }
+@keyframes mpm-spin { to { transform: rotate(360deg); } }
+.mpm-demo-notice {
+  text-align: center; font-size: 11px; color: #9ca3af;
+  padding: 0 20px 16px;
+}

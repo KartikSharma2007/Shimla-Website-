@@ -1,0 +1,1595 @@
+/* ==========================================
+   GREENISH-WHITE THEME LOGIN
+   Desktop layout: COMPLETELY UNCHANGED
+   Mobile: Matches reference image layout
+   ========================================== */
+Css patches · CSS
+Copy
+
+/* ================================================================
+   ADD TO login.css — paste at the very top before :root or any rule
+   ================================================================ */
+
+/* DESKTOP: hide the signup link inside form-header (only shown on mobile) */
+.lg-form-header p {
+  display: none;
+}
+
+/* DESKTOP: hide the mobile-only "Or Continue With" + Google pill */
+.lg-mobile-bottom-google {
+  display: none;
+}
+
+/* Rename: .lg-social-section → .lg-desktop-google-section (used in updated Login.jsx) */
+/* If your CSS still has .lg-social-section rules, rename them to .lg-desktop-google-section */
+/* OR just add this alias: */
+.lg-desktop-google-section {
+  /* inherits same styles you already have for .lg-social-section */
+}
+
+/* "or sign in with email" divider under Google button on desktop */
+.lg-separator-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0 4px;
+}
+.lg-separator-label::before,
+.lg-separator-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+.lg-separator-label span {
+  font-size: 13px;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+/* Google fallback button when OAuth not configured */
+.lg-google-fallback-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 20px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  font-family: inherit;
+}
+.lg-google-fallback-btn:hover {
+  background: #f9fafb;
+  border-color: #10b981;
+  box-shadow: 0 4px 16px rgba(16,185,129,0.15);
+  transform: translateY(-1px);
+}
+
+/* ── INSIDE your existing @media (max-width: 1024px) block in login.css ──
+   ADD these lines: */
+/*
+  .lg-form-header p       { display: block; }        <- show signup link on mobile
+  .lg-desktop-google-section { display: none; }      <- hide desktop Google above inputs
+  .lg-mobile-bottom-google   { display: block; }     <- show mobile Google below Login btn
+  .lg-form-footer            { display: none; }      <- hide desktop footer on mobile
+  .lg-signup-inline-link {display: none;}
+*/
+:root {
+  --bg-primary: #f0fdf4;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --accent-green: #10b981;
+  --accent-teal: #14b8a6;
+  --accent-lime: #84cc16;
+  --accent-emerald: #059669;
+  --text-primary: #064e3b;
+  --text-secondary: #065f46;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  --border-color: #d1fae5;
+  --border-focus: #10b981;
+  --error-red: #ef4444;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(16, 185, 129, 0.15);
+  --gradient-start: #10b981;
+  --gradient-end: #059669;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── DESKTOP (unchanged) ── */
+.lg-login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #ffffff 100%);
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lg-bg-shapes {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.lg-form-header p {
+  display: none;
+}
+.lg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.25;
+  animation: float 20s infinite ease-in-out;
+}
+.lg-shape-1 { width: 500px; height: 500px; background: #10b981; top: -150px; right: -100px; animation-delay: 0s; }
+.lg-shape-2 { width: 400px; height: 400px; background: #34d399; bottom: -100px; left: -100px; animation-delay: -5s; }
+.lg-shape-3 { width: 300px; height: 300px; background: #6ee7b7; top: 40%; right: 20%; animation-delay: -10s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33%       { transform: translate(30px,-30px) scale(1.1); }
+  66%       { transform: translate(-20px,20px) scale(0.9); }
+}
+
+.lg-login-content {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 60px;
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+}
+
+.lg-features-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--text-primary);
+  padding-right: 40px;
+}
+
+.lg-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 60px; }
+
+.lg-brand-icon {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  background-image: url('../../assets/logo1.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.4);
+  flex-shrink: 0;
+}
+
+.lg-brand-name { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: var(--text-primary); }
+
+.lg-features-list h2 {
+  font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 40px;
+  background: linear-gradient(135deg, #064e3b, #059669);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.lg-feature-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
+
+.lg-feature-card {
+  display: flex; align-items: center; gap: 16px; padding: 20px;
+  background: rgba(255,255,255,0.8); border: 1px solid var(--border-color);
+  border-radius: 16px; transition: all 0.3s ease; backdrop-filter: blur(10px); box-shadow: var(--shadow-sm);
+}
+.lg-feature-card:hover { background: #fff; transform: translateX(8px); border-color: var(--accent-green); box-shadow: var(--shadow-md); }
+
+.lg-feature-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lg-feature-icon.lg-green { background: rgba(16,185,129,0.15); color: var(--accent-green); }
+.lg-feature-icon.lg-teal  { background: rgba(20,184,166,0.15); color: var(--accent-teal); }
+.lg-feature-icon.lg-lime  { background: rgba(132,204,22,0.15);  color: var(--accent-lime); }
+
+.lg-feature-text h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: var(--text-primary); }
+.lg-feature-text p  { font-size: 14px; color: var(--text-muted); }
+
+.lg-testimonial { padding: 24px; background: rgba(255,255,255,0.9); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+.lg-stars { color: #fbbf24; font-size: 18px; margin-bottom: 12px; letter-spacing: 2px; }
+.lg-testimonial p { font-size: 16px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 12px; font-style: italic; }
+.lg-author { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+
+.lg-form-section { display: flex; align-items: center; justify-content: center; width: 100%; }
+
+.lg-form-container {
+  width: 100%; max-width: 440px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lg-form-header { text-align: center; margin-bottom: 32px; }
+.lg-form-header h1 { font-size: 32px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+.lg-form-header p { color: var(--text-muted); font-size: 15px; }
+
+.lg-alert {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  margin-bottom: 24px; font-size: 14px; font-weight: 500;
+  animation: shake 0.5s ease-in-out;
+}
+.lg-alert.lg-error { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); color: var(--error-red); }
+.lg-alert-icon { width: 20px; height: 20px; background: var(--error-red); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-5px); }
+  75%       { transform: translateX(5px); }
+}
+
+.lg-login-form { display: flex; flex-direction: column; gap: 20px; }
+.lg-social-section { margin-bottom: 8px; }
+.lg-google-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 22px;
+  position: relative;
+}
+
+/* Mobile remember row */
+
+.lg-mobile-remember-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+}
+
+.lg-forgot-link{
+  font-size:14px;
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:500;
+  margin-left: 220px;
+}
+
+.lg-forgot-link:hover{
+  text-decoration:underline;
+}
+
+.lg-google-btn-wrapper > div {
+  width: 100% !important;
+}
+
+.lg-google-btn-wrapper iframe {
+  width: 100% !important;
+}
+
+/* Hover effect wrapper */
+.lg-google-btn-wrapper {
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+/* Hover glow */
+.lg-google-btn-wrapper:hover {
+  box-shadow: 0 6px 25px rgba(16,185,129,0.35);
+  transform: translateY(-2px);
+}
+
+/* Optional green outline effect */
+.lg-google-btn-wrapper:hover::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50px;
+  border: 2px solid #10b981;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.lg-separator { display: flex; align-items: center; gap: 16px; color: var(--text-light); font-size: 13px; font-weight: 500; }
+.lg-separator::before, .lg-separator::after { content: ''; flex: 1; height: 1px; background: var(--border-color); }
+
+.lg-input-group { display: flex; flex-direction: column; gap: 8px; }
+.lg-input-group.lg-focused label { color: var(--accent-green); }
+
+label { font-size: 14px; font-weight: 600; color: var(--text-secondary); transition: color 0.2s; }
+.lg-label-wrap { display: flex; justify-content: space-between; align-items: center; }
+
+.lg-input-wrap { position: relative; display: flex; align-items: center; }
+
+.lg-input-symbol { position: absolute; left: 16px; color: var(--text-light); transition: color 0.2s; pointer-events: none; }
+.lg-input-group.lg-focused .lg-input-symbol { color: var(--accent-green); }
+
+input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 15px;
+  transition: all 0.2s;
+  outline: none;
+}
+input:focus { border-color: var(--border-focus); background: #fff; box-shadow: 0 0 0 4px rgba(16,185,129,0.1); }
+input::placeholder { color: var(--text-light); }
+
+.lg-toggle-btn {
+  position: absolute; right: 12px;
+  background: none; border: none; color: var(--text-light);
+  cursor: pointer; padding: 6px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; transition: all 0.2s;
+}
+.lg-toggle-btn:hover { color: var(--accent-green); background: rgba(16,185,129,0.1); }
+
+.lg-submit-btn {
+  width: 100%; padding: 16px; margin-top: 8px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  border: none; border-radius: 12px;
+  color: white; font-size: 16px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(16,185,129,0.3);
+  position: relative; overflow: hidden;
+}
+.lg-submit-btn::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+.lg-submit-btn:hover:not(:disabled)::before { left: 100%; }
+.lg-submit-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.4); }
+.lg-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.lg-spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.lg-form-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-color); text-align: center; }
+.lg-form-footer p { color: var(--text-muted); font-size: 14px; margin-bottom: 8px; }
+
+.lg-create-account { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-green); text-decoration: none; font-weight: 600; font-size: 15px; transition: all 0.2s; }
+.lg-create-account span { transition: transform 0.2s; }
+.lg-create-account:hover { color: var(--accent-emerald); gap: 10px; }
+.lg-create-account:hover span { transform: translateX(4px); }
+
+/* =========================================================
+   MOBILE-ONLY ELEMENTS — hidden on desktop
+   ========================================================= */
+.lg-mobile-hero-section,
+.lg-mobile-google-btn {
+  display: none;
+}
+
+/* =========================================================
+   MOBILE REDESIGN — matches reference image layout exactly
+   Green top hero + white bottom sheet
+   Only activates on ≤ 1024px. Desktop untouched above.
+   ========================================================= */
+@media (max-width: 1024px) {
+
+  /* ── Page: full screen, no padding, green base ── */
+  .lg-login-page {
+    padding: 0;
+    display: block;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #059669; /* solid green base matches reference */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+.lg-forgot-link{
+  font-size:14px;
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:500;
+  margin-left: 200px;
+}
+  .lg-form-header p {
+  display: block;
+}
+
+  .lg-bg-shapes { display: none; }
+
+  /* ── Grid → single column ── */
+  .lg-login-content {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    min-height: 100vh;
+    align-items: stretch;
+  }
+
+  /* ── Desktop left features: hide ── */
+  .lg-features-section { display: none; }
+
+  /* ── Form section: flex column, hero on top, sheet on bottom ── */
+  .lg-form-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  /* =====================================================
+     TOP HERO — the green section with headline + illustration
+     Matches the top ~44% of the reference image
+     ===================================================== */
+  .lg-mobile-hero-section {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 52px 28px 0 28px;
+    min-height: 42vh;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(140deg, #059669 0%, #047857 60%, #065f46 100%);
+    flex-shrink: 0;
+  }
+
+  /* large decorative circle — top right, like reference */
+  .lg-mobile-hero-section::before {
+    content: '';
+    position: absolute;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.12);
+    top: -60px; right: -60px;
+    pointer-events: none;
+  }
+
+  /* second circle ring */
+  .lg-mobile-hero-section::after {
+    content: '';
+    position: absolute;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    top: -20px; right: -20px;
+    pointer-events: none;
+  }
+
+  /* ── Hero headline text ── */
+  .lg-mobile-hero-text {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    animation: heroTextIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  @keyframes heroTextIn {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .lg-mobile-hero-text h2 {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #ffffff;
+    max-width: 260px;
+    margin-top: 8px;
+    letter-spacing: -0.5px;
+  }
+
+  /* green-tinted accent word — like "top of" in teal in reference */
+  .lg-mobile-hero-text h2 .lg-accent-word {
+    color: #a7f3d0;
+  }
+
+  /* ── Hero illustration area (right side of hero) ── */
+  .lg-mobile-hero-illustration {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 185px;
+    height: 195px;
+    z-index: 1;
+  }
+
+  /* CSS-drawn floating phone mockup — mimics the phone in reference */
+  .lg-hero-phone {
+    position: absolute;
+    right: 18px;
+    bottom: 10px;
+    width: 110px;
+    height: 170px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    border: 2px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.3);
+    animation: phoneFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes phoneFloat {
+    0%, 100% { transform: translateY(0px) rotate(-4deg); }
+    50%       { transform: translateY(-10px) rotate(-4deg); }
+  }
+
+  /* notch */
+  .lg-hero-phone::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 50%; transform: translateX(-50%);
+    width: 32px; height: 6px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 3px;
+  }
+
+  /* inner screen lines — like app UI preview */
+  .lg-hero-phone::after {
+    content: '';
+    position: absolute;
+    top: 28px; left: 10px; right: 10px; bottom: 14px;
+    background:
+      linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 100% 22px, 50% 100%;
+    border-radius: 10px;
+  }
+
+  /* decorative mountain/map pin SVG-like shape */
+  .lg-hero-deco-pin {
+    position: absolute;
+    right: 140px;
+    bottom: 55px;
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    border: 2px solid rgba(255,255,255,0.4);
+    animation: pinBounce 3s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes pinBounce {
+    0%, 100% { transform: rotate(-45deg) translateY(0); }
+    50%       { transform: rotate(-45deg) translateY(-6px); }
+  }
+
+  .lg-hero-deco-pin::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 12px; height: 12px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+  }
+
+  /* decorative small circles scattered like snowflake/geo elements */
+  .lg-hero-deco-dots {
+    position: absolute;
+    right: 26px;
+    top: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 8px);
+    gap: 6px;
+    opacity: 0.25;
+  }
+
+  .lg-hero-deco-dots span {
+    width: 6px; height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    display: block;
+  }
+
+  /* =====================================================
+     BOTTOM WHITE SHEET
+     Matches the white card in the reference image
+     ===================================================== */
+  .lg-form-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 24px 40px;
+    background: #ffffff;
+    border-radius: 32px 32px 0 0;
+    border: none;
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.14);
+    position: relative;
+    z-index: 5;
+    animation: sheetUp 0.65s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+    flex: 1;
+  }
+
+  @keyframes sheetUp {
+    from { opacity: 0.5; transform: translateY(50px); }
+    to   { opacity: 1;   transform: translateY(0); }
+  }
+
+  /* ── Handle pill ── */
+  .lg-form-container::before {
+    content: '';
+    display: block;
+    width: 40px; height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    margin: 16px auto 28px;
+  }
+
+  /* ── Sheet header: "Login" large, "Don't have account? Sign Up" below ── */
+  .lg-form-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .lg-form-header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 10px;
+    letter-spacing: -0.4px;
+  }
+
+  /* The "Don't have an account?" line moves UP into form-header on mobile */
+  .lg-form-header p {
+    font-size: 13.5px;
+    color: #6b7280;
+    font-weight: 400;
+  }
+
+  .lg-form-header p a,
+  .lg-form-header .lg-signup-inline-link {
+    color: #059669;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* ── Inputs — clean flat style matching reference ── */
+  label { display: none; } /* reference has no floating labels, icons only */
+
+  .lg-input-group { gap: 0; }
+  .lg-input-group.lg-focused .lg-input-symbol { color: #059669; }
+
+  input {
+    background: #f3f4f6;
+    border: 1.5px solid #f3f4f6;
+    border-radius: 14px;
+    padding: 16px 16px 16px 50px;
+    font-size: 16px;
+    color: #111827;
+    font-weight: 400;
+    transition: all 0.2s;
+  }
+
+  input::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+    font-size: 15px;
+  }
+
+  input:focus {
+    background: #fff;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.10);
+    color: #111827;
+  }
+
+  .lg-input-symbol { left: 16px; color: #9ca3af; }
+  .lg-toggle-btn   { right: 14px; color: #9ca3af; }
+  .lg-toggle-btn:hover { color: #059669; background: rgba(16,185,129,0.08); }
+
+  .lg-login-form { gap: 14px; }
+
+  /* ── Remember me + Forgot password row — matches reference ── */
+  .lg-mobile-remember-row {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+  }
+
+  .lg-remember-left {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .lg-remember-left input[type="checkbox"] {
+    width: 16px; height: 16px;
+    padding: 0;
+    border-radius: 4px;
+    border: 1.5px solid #d1d5db;
+    background: #fff;
+    accent-color: #059669;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .lg-remember-label {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  /* Forgot password link */
+
+.lg-forgot-link{
+  font-size:14px;
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:500;
+}
+
+.lg-forgot-link:hover{
+  text-decoration:underline;
+}
+
+  /* ── Submit button — full-width, pill, solid green ── */
+  .lg-submit-btn {
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+    border-radius: 50px; /* pill shape — matches reference */
+    padding: 18px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 8px 28px rgba(5,150,105,0.38);
+    margin-top: 6px;
+  }
+
+  .lg-submit-btn:hover:not(:disabled) {
+    box-shadow: 0 12px 36px rgba(5,150,105,0.48);
+    transform: translateY(-1px);
+  }
+
+  /* ── "Or Continue With" divider ── */
+  .lg-separator {
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 4px 0;
+  }
+
+  .lg-separator::before, .lg-separator::after { background: #e5e7eb; }
+
+  /* ── Google button only (mobile) ── */
+  .lg-mobile-google-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px 20px;
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 50px; /* pill — matches reference */
+    font-size: 15px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    text-decoration: none;
+  }
+
+  .lg-mobile-google-btn:hover {
+    background: #f9fafb;
+    border-color: #10b981;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  }
+
+  .lg-google-icon {
+    width: 20px; height: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ── Hide desktop social section on mobile ── */
+  .lg-social-section { display: none; }
+
+  /* ── Alert ── */
+  .lg-alert.lg-error {
+    border-radius: 12px;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  /* ── Footer: hide on mobile (signup link moved to form-header) ── */
+  .lg-form-footer { display: none; }
+}
+
+/* ── Tiny phones ── */
+@media (max-width: 400px) {
+  .lg-mobile-hero-section { min-height: 38vh; padding: 44px 22px 0; }
+  .lg-mobile-hero-text h2 { font-size: 26px; }
+  .lg-form-container { padding: 0 18px 32px; }
+  .lg-form-header h1 { font-size: 26px; }
+  .lg-submit-btn { padding: 16px; font-size: 15px; }
+  input { padding: 14px 14px 14px 46px; }
+}
+
+@media (max-width: 350px) {
+  .lg-mobile-hero-text h2 { font-size: 23px; }
+  .lg-form-header h1 { font-size: 24px; }
+}
+
+/* Accessibility */
+button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 2px;
+}
+
+* { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   DESKTOP BUTTON OVERRIDES  (min-width: 1025px)
+   Mobile styles completely untouched below 1025px
+   ═══════════════════════════════════════════════════════════════ */
+@media (min-width: 1025px) {
+
+  /* ── Primary submit button — clean, official ── */
+  .lg-submit-btn {
+    width: 100%;
+    padding: 13px 24px;
+    margin-top: 6px;
+    background: #1a2332;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .lg-submit-btn::before { display: none; }
+  .lg-submit-btn:hover:not(:disabled) {
+    background: #0e1820;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    transform: translateY(-1px);
+  }
+  .lg-submit-btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .lg-submit-btn:disabled {
+    background: #94a3b8;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── "Create an account" footer link ── */
+  .lg-create-account {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    color: #1a2332;
+    background: #f8fafc;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .lg-create-account:hover {
+    border-color: #1a2332;
+    background: #f1f5f9;
+    gap: 10px;
+  }
+
+  /* Separator label */
+  .lg-separator-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0 4px;
+    font-size: 12.5px;
+    color: #94a3b8;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+  .lg-separator-label::before,
+  .lg-separator-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   GOOGLE PASSWORD MODAL  (.lg-gpw-*)
+   Shown when a brand-new Google user needs to create a password.
+═══════════════════════════════════════════════════════════════════════ */
+
+.lg-gpw-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: lgGpwFadeIn 0.2s ease;
+}
+
+@keyframes lgGpwFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lg-gpw-modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 32px 28px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+  animation: lgGpwSlideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes lgGpwSlideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Header */
+.lg-gpw-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.lg-gpw-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 2px solid #bbf7d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  color: #16a34a;
+}
+
+.lg-gpw-header h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.lg-gpw-header p {
+  margin: 0 0 12px;
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.lg-gpw-email-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* Form */
+.lg-gpw-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lg-gpw-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lg-gpw-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Reuse .lg-input-wrap styles — just needs error border variant */
+.lg-input-wrap.lg-input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+/* Strength bar */
+.lg-gpw-strength {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.lg-gpw-strength-bar {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.lg-gpw-strength-seg {
+  height: 4px;
+  flex: 1;
+  border-radius: 2px;
+  transition: background 0.25s ease;
+}
+
+/* Match / mismatch feedback */
+.lg-gpw-match {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #10b981;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.lg-gpw-no-match {
+  font-size: 12px;
+  color: #ef4444;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Hints checklist */
+.lg-gpw-hints {
+  list-style: none;
+  margin: 0;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lg-gpw-hints li {
+  font-size: 12px;
+  color: #94a3b8;
+  padding-left: 18px;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.lg-gpw-hints li::before {
+  content: '○';
+  position: absolute;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.lg-gpw-hints li.lg-gpw-hint--ok {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.lg-gpw-hints li.lg-gpw-hint--ok::before {
+  content: '✓';
+  color: #16a34a;
+}
+
+/* Cancel link */
+.lg-gpw-cancel {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 14px 0 0;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.lg-gpw-cancel:hover { color: #ef4444; }
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  .lg-gpw-modal {
+    padding: 28px 20px 22px;
+    border-radius: 16px;
+  }
+  .lg-gpw-header h2 { font-size: 1.15rem; }
+}
+
+/* ── Ban / Suspension alert ──────────────────────────────────────────────── */
+.lg-alert-banned {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff1f2;
+  border: 1.5px solid #fecdd3;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  animation: lg-shake 0.4s cubic-bezier(0.36,0.07,0.19,0.97);
+}
+.lg-alert-banned .lg-alert-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  background: none;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  display: inline;
+  line-height: 1;
+}
+.lg-alert-banned strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #be123c;
+  margin-bottom: 4px;
+}
+.lg-alert-banned p {
+  font-size: 12px;
+  color: #9f1239;
+  line-height: 1.5;
+  margin: 0;
+}
+.lg-alert-banned p a {
+  color: #be123c;
+  font-weight: 600;
+  text-decoration: underline;
+}
+@keyframes lg-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VERIFY LOCAL PASSWORD MODAL  (.vlpm-*)
+   Shown when a local-account user clicks Google with the same email.
+   Clean, modern card design — feels like a native OS dialog.
+═══════════════════════════════════════════════════════════════════════════ */
+
+.vlpm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: vlpmFadeIn 0.18s ease;
+}
+
+@keyframes vlpmFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.vlpm-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.05),
+    0 20px 60px rgba(0,0,0,0.18),
+    0 8px 20px rgba(0,0,0,0.08);
+  animation: vlpmSlide 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  overflow: hidden;
+}
+
+@keyframes vlpmSlide {
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0)    scale(1);    opacity: 1; }
+}
+
+/* Top color bar */
+.vlpm-accent-bar {
+  height: 4px;
+  background: linear-gradient(90deg, #1A3C6E 0%, #2563eb 50%, #1A3C6E 100%);
+  background-size: 200% 100%;
+  animation: vlpmShimmer 2s linear infinite;
+}
+
+@keyframes vlpmShimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* Close button */
+.vlpm-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  z-index: 2;
+}
+
+.vlpm-close:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.vlpm-header {
+  padding: 32px 32px 0;
+  text-align: center;
+}
+
+.vlpm-avatar-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.vlpm-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1A3C6E, #2563eb);
+  color: #fff;
+  font-size: 26px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -1px;
+  box-shadow: 0 4px 16px rgba(26,60,110,0.3);
+}
+
+.vlpm-google-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.vlpm-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+
+.vlpm-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+
+.vlpm-email-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 4px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Error ──────────────────────────────────────────────────────────────── */
+.vlpm-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: #fef2f2;
+  border: 1.5px solid #fecaca;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: 16px 32px 0;
+  font-size: 13px;
+  color: #dc2626;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.vlpm-error svg { flex-shrink: 0; margin-top: 1px; }
+
+/* ── Form ───────────────────────────────────────────────────────────────── */
+.vlpm-form {
+  padding: 20px 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vlpm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vlpm-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: 0.2px;
+}
+
+.vlpm-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  padding: 0 12px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  height: 48px;
+}
+
+.vlpm-input-row:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+  background: #fff;
+}
+
+.vlpm-input-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.vlpm-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  font-family: inherit;
+}
+
+.vlpm-input::placeholder { color: #94a3b8; }
+
+.vlpm-eye {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.vlpm-eye:hover { color: #334155; }
+
+/* ── Forgot row ─────────────────────────────────────────────────────────── */
+.vlpm-forgot-row {
+  text-align: right;
+  margin-top: -6px;
+}
+
+.vlpm-forgot-link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.vlpm-forgot-link:hover { text-decoration: underline; }
+
+/* ── Submit button ──────────────────────────────────────────────────────── */
+.vlpm-submit {
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1A3C6E, #2563eb);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.15s, transform 0.1s;
+  letter-spacing: 0.1px;
+}
+
+.vlpm-submit:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.vlpm-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.vlpm-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Spinner inside button */
+.vlpm-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: vlpmSpin 0.7s linear infinite;
+}
+
+@keyframes vlpmSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Cancel link ────────────────────────────────────────────────────────── */
+.vlpm-cancel {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #94a3b8;
+  cursor: pointer;
+  text-align: center;
+  padding: 2px;
+  transition: color 0.15s;
+  font-family: inherit;
+  margin-top: -4px;
+}
+
+.vlpm-cancel:hover { color: #ef4444; }
+
+/* ── Footer note ────────────────────────────────────────────────────────── */
+.vlpm-note {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+  padding: 16px 32px 28px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Success state ──────────────────────────────────────────────────────── */
+.vlpm-success-state {
+  padding: 48px 32px 52px;
+  text-align: center;
+}
+
+.vlpm-success-ring {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  animation: vlpmPop 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+}
+
+@keyframes vlpmPop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.vlpm-success-state h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+.vlpm-success-state p {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .vlpm-card { border-radius: 20px; }
+  .vlpm-header { padding: 28px 24px 0; }
+  .vlpm-form { padding: 16px 24px 0; }
+  .vlpm-note { padding: 14px 24px 24px; }
+  .vlpm-error { margin: 14px 24px 0; }
+}
+
+/* Google sign-in unavailable — shown when VITE_GOOGLE_CLIENT_ID is not set */
+.lg-google-unavailable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 20px;
+  color: #94a3b8;
+  font-size: 13px;
+  font-family: inherit;
+  background: #f8fafc;
+  cursor: not-allowed;
+}

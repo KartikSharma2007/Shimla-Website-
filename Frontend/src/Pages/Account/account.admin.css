@@ -1,0 +1,110 @@
+/* 
+  ACCOUNT PAGE — ADMIN BUTTON STYLES
+  Add this to your account.css OR import it in Account.jsx:
+    import './account.admin.css';
+  
+  The .sh-admin-nav-btn matches the exact style of other sidebar nav buttons
+  but with a green accent to stand out as special.
+*/
+
+.sh-admin-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  color: #2f7d57;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+  margin-top: 6px;
+  position: relative;
+}
+
+.sh-admin-nav-btn::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #2f7d57;
+  border-radius: 0 2px 2px 0;
+}
+
+.sh-admin-nav-btn:hover {
+  background: linear-gradient(90deg, #e8f5e9 0%, transparent 100%);
+  color: #1e5c3a;
+  border-left-color: #2f7d57;
+}
+
+.sh-admin-nav-btn svg {
+  flex-shrink: 0;
+  color: #2f7d57;
+}
+
+/* Small divider line above admin button */
+.sh-admin-nav-btn::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: #eee;
+}
+
+/* ── Mobile bottom tab bar: Admin button ── */
+.sh-tab-btn-admin {
+  color: #2f7d57 !important;
+  position: relative;
+}
+.sh-tab-btn-admin svg {
+  color: #2f7d57;
+}
+.sh-tab-btn-admin::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  background: #2f7d57;
+  border-radius: 50%;
+}
+
+/* ── Avatar zoom hint (mobile hero) ── */
+.sh-mob-hero-avatar {
+  position: relative;
+}
+.sh-mob-avatar-zoom-hint {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ── Avatar modal: bigger on mobile ── */
+@media (max-width: 600px) {
+  .sh-avatar-modal-img {
+    max-width: 85vw;
+    max-height: 85vw;
+    border-radius: 50%;
+  }
+  .sh-avatar-modal {
+    padding: 16px;
+  }
+}

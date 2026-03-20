@@ -1,0 +1,702 @@
+/* ============================================================
+   BEST TIME TO VISIT SHIMLA — Redesigned Section
+   Scope: .bts-* classes only. Zero interference with other sections.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── Section Shell ── */
+.bts-section {
+  position: relative;
+  padding: 100px 0 120px;
+  background: #fafaf8;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.bts-section.bts-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Decorative background blobs ── */
+.bts-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.06;
+  pointer-events: none;
+  transition: background 0.6s ease;
+}
+.bts-blob-1 {
+  width: 600px; height: 600px;
+  top: -200px; right: -150px;
+}
+.bts-blob-2 {
+  width: 400px; height: 400px;
+  bottom: -100px; left: -100px;
+}
+
+/* ── Container ── */
+.bts-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.bts-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.bts-eyebrow {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+.bts-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+}
+
+.bts-title-shimla {
+  font-style: italic;
+  transition: color 0.5s ease;
+}
+
+.bts-intro {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem;
+  color: #6b7280;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* ── Season Tabs ── */
+.bts-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.bts-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 28px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'DM Sans', sans-serif;
+  min-width: 130px;
+}
+
+.bts-tab:hover {
+  border-color: #d1d5db;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.bts-tab-active {
+  border-color: var(--tab-border);
+  background: var(--tab-light);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+}
+
+.bts-tab-emoji {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.bts-tab-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.bts-tab-months {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.bts-tab-active .bts-tab-name {
+  color: var(--tab-accent);
+}
+
+/* ── Main Panel ── */
+.bts-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 60px;
+  animation: bts-fadein 0.5s ease;
+}
+
+@keyframes bts-fadein {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Image Side ── */
+.bts-panel-image {
+  position: relative;
+}
+
+.bts-img-frame {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: #e5e7eb;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.14);
+}
+
+.bts-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 8s ease;
+  transform: scale(1.06);
+}
+
+.bts-img.bts-img-loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bts-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0,0,0,0.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* Floating badge */
+.bts-img-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.bts-badge-emoji {
+  font-size: 1.4rem;
+}
+
+.bts-badge-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.bts-badge-months {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+/* Stats strip */
+.bts-img-stats {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.bts-img-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.bts-stat-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.7);
+}
+
+.bts-stat-val {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.bts-stat-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.2);
+  margin: 0 8px;
+}
+
+/* Crowd colours */
+.bts-crowd-high   { color: #ef4444 !important; }
+.bts-crowd-medium { color: #f59e0b !important; }
+.bts-crowd-low    { color: #10b981 !important; }
+
+/* ── Content Side ── */
+.bts-panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 8px;
+}
+
+.bts-content-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bts-season-icon {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.bts-season-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0 0 2px;
+  line-height: 1.1;
+  transition: color 0.4s ease;
+}
+
+.bts-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #9ca3af;
+}
+
+.bts-description {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Tip box */
+.bts-tip {
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid;
+  transition: background 0.4s, border-color 0.4s;
+}
+
+.bts-tip-label {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  transition: color 0.4s;
+}
+
+.bts-tip-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #374151;
+  margin: 0;
+}
+
+/* Activities */
+.bts-activities-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #9ca3af;
+  margin: 0 0 12px;
+}
+
+.bts-activities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 16px;
+}
+
+.bts-activity-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  color: #374151;
+}
+
+.bts-activity-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.75;
+  transition: background 0.4s;
+}
+
+/* Climate bar */
+.bts-climate-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.bts-climate-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #9ca3af;
+  width: 96px;
+  flex-shrink: 0;
+}
+
+.bts-climate-track {
+  flex: 1;
+  height: 5px;
+  background: #f3f4f6;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bts-climate-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
+}
+
+.bts-climate-val {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  color: #6b7280;
+  width: 56px;
+  text-align: right;
+}
+
+/* CTA Button */
+.bts-cta {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s, background 0.4s;
+  text-align: left;
+  letter-spacing: 0.3px;
+}
+
+.bts-cta:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+/* ── Month Timeline ── */
+.bts-timeline {
+  margin-bottom: 48px;
+}
+
+.bts-timeline-label {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #9ca3af;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.bts-months {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #f3f4f6;
+  border-radius: 16px;
+  padding: 8px;
+  gap: 4px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.bts-month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  padding: 8px 4px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.bts-month:hover {
+  background: #f9fafb;
+}
+
+.bts-month-active {
+  background: color-mix(in srgb, var(--m-accent) 10%, transparent) !important;
+}
+
+.bts-month-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #6b7280;
+  transition: color 0.3s;
+}
+
+.bts-month-active .bts-month-name {
+  color: var(--m-accent);
+  font-weight: 700;
+}
+
+.bts-month-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.bts-month-active .bts-month-dot {
+  transform: scale(1.4);
+}
+
+/* ── 4-Card Summary ── */
+.bts-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.bts-card {
+  background: #fff;
+  border: 1.5px solid #f3f4f6;
+  border-radius: 20px;
+  padding: 20px 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'DM Sans', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.bts-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  border-color: var(--c-border);
+}
+
+.bts-card-active {
+  border-color: var(--c-border);
+  background: var(--c-light);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+}
+
+.bts-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.bts-card-emoji {
+  font-size: 1.5rem;
+}
+
+.bts-card-crowd {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bts-card-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+
+.bts-card-months {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  margin-bottom: 8px;
+}
+
+.bts-card-temp {
+  font-size: 0.82rem;
+  color: #4b5563;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.bts-card-bar {
+  height: 3px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bts-card-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .bts-panel {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .bts-img-frame {
+    aspect-ratio: 16/9;
+  }
+
+  .bts-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .bts-section {
+    padding: 72px 0 80px;
+  }
+
+  .bts-container {
+    padding: 0 20px;
+  }
+
+  .bts-tabs {
+    gap: 8px;
+  }
+
+  .bts-tab {
+    min-width: 0;
+    padding: 12px 16px;
+    flex: 1;
+  }
+
+  .bts-tab-months {
+    display: none;
+  }
+
+  .bts-months {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+  }
+
+  .bts-months::-webkit-scrollbar { display: none; }
+
+  .bts-month {
+    min-width: 44px;
+    flex: 0 0 auto;
+  }
+
+  .bts-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .bts-activities-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .bts-title {
+    font-size: 2rem;
+  }
+
+  .bts-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .bts-tab {
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .bts-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bts-card {
+    padding: 16px 14px;
+  }
+}

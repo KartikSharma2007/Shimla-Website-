@@ -1,0 +1,164 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   Admin components — stat cards, bar chart, recent tables
+   Premium redesign — vivid accent system, colored icon wells
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Stat grid ───────────────────────────────────────────────────────────── */
+.adm-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.adm-stat-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.03);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+/* Accent stripe at top */
+.adm-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent, #10b981);
+  border-radius: 14px 14px 0 0;
+}
+.adm-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.adm-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.adm-stat-icon-wrap {
+  width: 42px; height: 42px;
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  /* background set inline via var(--icon-bg) */
+  background: var(--icon-bg, rgba(16,185,129,0.12));
+}
+.adm-stat-emoji  { font-size: 20px; line-height: 1; }
+.adm-stat-trend  {
+  font-size: 11px;
+  font-weight: 600;
+  color: #10b981;
+  background: #f0fdf4;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid #bbf7d0;
+}
+.adm-stat-trend.down { color: #ef4444; background: #fff1f2; border-color: #fecdd3; }
+
+.adm-stat-value  {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.adm-stat-label  { font-size: 12px; color: #64748b; font-weight: 500; margin-top: 2px; }
+.adm-stat-sub    { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+/* Skeleton */
+.adm-stat-skeleton {
+  height: 100px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%);
+  background-size: 200% 100%;
+  animation: adm-shimmer 1.5s infinite;
+}
+@keyframes adm-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Bar chart ───────────────────────────────────────────────────────────── */
+.adm-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 160px;
+  padding-bottom: 28px;
+  position: relative;
+}
+.adm-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  height: 100%;
+}
+.adm-bar-count {
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.adm-bar-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.adm-bar-fill {
+  width: 100%;
+  background: linear-gradient(to top, #059669, #34d399);
+  border-radius: 5px 5px 0 0;
+  min-height: 4px;
+  transition: height 0.7s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+.adm-bar-month {
+  position: absolute;
+  bottom: -22px;
+  font-size: 10px;
+  color: #94a3b8;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* ── Recent row ──────────────────────────────────────────────────────────── */
+.adm-recent-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.adm-recent-row > .adm-card {
+  flex: 1;
+  min-width: 280px;
+  margin-bottom: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1200px) { .adm-stat-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px)  { .adm-stat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) {
+  .adm-stat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .adm-stat-card { padding: 14px 12px; }
+  .adm-stat-value { font-size: 22px; }
+  .adm-stat-icon-wrap { width: 36px; height: 36px; border-radius: 9px; }
+  .adm-stat-sub { display: none; }
+  .adm-bar-chart { height: 120px; }
+  .adm-recent-row { flex-direction: column; gap: 12px; }
+}
+@media (max-width: 360px) {
+  .adm-stat-value { font-size: 19px; }
+}
